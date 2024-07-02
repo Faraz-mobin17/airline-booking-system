@@ -1,12 +1,17 @@
 const { StatusCodes } = require("http-status-codes");
-const { ErrorResponse } = require("../errors/common");
+const { ApiError } = require("../utils");
 
 function validateCreateRequest(req, res, next) {
   if (!req.body.modelNumber || !req.body.capacity) {
-    ErrorResponse.message =
-      "Something went wrong while creating airplane. Please try again later.";
-    ErrorResponse.error = { message: "Bad Request" };
-    return res.status(StatusCodes.BAD_REQUEST).json(ErrorResponse);
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json(
+        new ApiError(
+          StatusCodes.BAD_REQUEST,
+          null,
+          "Model number and capacity are required"
+        )
+      );
   }
   next();
 }

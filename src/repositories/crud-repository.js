@@ -1,3 +1,6 @@
+const { StatusCodes } = require("http-status-codes");
+const { ApiError } = require("../utils");
+
 class CrudRepository {
   constructor(model) {
     this.model = model;
@@ -14,11 +17,21 @@ class CrudRepository {
         id: data,
       },
     });
+    if (!response) {
+      throw new ApiError(StatusCodes.NOT_FOUND, null, "Airplane not found");
+    }
     return response;
   }
 
   async get(data) {
     const response = await this.model.findByPK(data);
+    if (!response) {
+      throw new ApiError(
+        StatusCodes.NOT_FOUND,
+        null,
+        "Airplane with the given ID not found"
+      );
+    }
     return response;
   }
 
