@@ -1,5 +1,5 @@
-const { createLogger, format, transport } = require("winston");
-const { combine, timestamp, label, printf } = require("winston-format");
+const { createLogger, format, transport, transports } = require("winston");
+const { combine, timestamp, label, printf } = format;
 
 const myFormat = printf(({ level, message, label, timestamp }) => {
   return `${timestamp} [${label}] ${level}: ${message}`;
@@ -13,8 +13,8 @@ const Logger = createLogger({
     myFormat
   ),
   transports: [
-    new transport.Console(),
-    new transport.File({ filename: "logs/info.log" }),
+    new transports.Console(),
+    new transports.File({ filename: "logs/info.log" }),
   ],
 });
 
