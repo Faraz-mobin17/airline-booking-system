@@ -8,4 +8,4 @@ const router = express.Router();
 // below is the example of how to use the router
 router.use("/v1", v1Routes);
 
-export default router;
+module.exports = router;
