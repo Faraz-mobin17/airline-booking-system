@@ -63,7 +63,23 @@ async function getAllFlights(req, res) {
       );
   }
 }
+
+async function getFlight(req, res) {
+  try {
+    const flight = await FlightService.getFlight(req.params.id);
+    return res
+      .status(StatusCodes.OK)
+      .json(
+        new ApiResponse(StatusCodes.OK, flight, "Flight fetched successfully")
+      );
+  } catch (error) {
+    return res
+      .status(StatusCodes.NOT_FOUND)
+      .json(new ApiError(StatusCodes.NOT_FOUND, error, "Flight not found"));
+  }
+}
 module.exports = {
   createFlight,
   getAllFlights,
+  getFlight,
 };

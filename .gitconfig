@@ -1,2 +1,11 @@
 [alias]
-undo = git reset soft HEAD^
+    undo = "git reset soft HEAD^"
+    gcm = "git commit -m"
+    gaa = "git add -A"
+    gco = "git checkout"
+    gcb = "git checkout -b"
+    gpl = "git pull"
+    gps = "git push"
+    gplm = "git pull origin master"
+    gpsm = "git push origin master"
+    gs = "git status"

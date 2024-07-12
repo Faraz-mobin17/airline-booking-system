@@ -61,7 +61,21 @@ async function getAllFlights(query) {
   }
 }
 
+async function getFlight(id) {
+  try {
+    const flight = await flightRepository.get(id);
+    return flight;
+  } catch (error) {
+    throw new ApiError(
+      StatusCodes.NOT_FOUND,
+      error,
+      "Cannot fetch the data of the flight"
+    );
+  }
+}
+
 module.exports = {
   createFlight,
   getAllFlights,
+  getFlight,
 };
