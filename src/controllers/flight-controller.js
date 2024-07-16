@@ -78,8 +78,38 @@ async function getFlight(req, res) {
       .json(new ApiError(StatusCodes.NOT_FOUND, error, "Flight not found"));
   }
 }
+
+async function updateRemainingSeats(req, res) {
+  try {
+    const response = await FlightService.updateRemainingSeats({
+      flightId: req.params.id,
+      seats: req.body.seats,
+      dec: req.body.dec,
+    });
+    return res
+      .status(StatusCodes.OK)
+      .json(
+        new ApiResponse(
+          StatusCodes.OK,
+          response,
+          "Remaining seats updated successfully"
+        )
+      );
+  } catch (error) {
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json(
+        new ApiError(
+          StatusCodes.INTERNAL_SERVER_ERROR,
+          error,
+          "Unable to update the remaining seats"
+        )
+      );
+  }
+}
 module.exports = {
   createFlight,
   getAllFlights,
   getFlight,
+  updateRemainingSeats,
 };
