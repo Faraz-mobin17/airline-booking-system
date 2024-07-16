@@ -12,5 +12,9 @@ router.post(
   FlightMiddlewares.validateFlightRequest,
   FlightController.createFlight
 );
-
+router.patch(
+  "/:id/seats",
+  FlightMiddlewares.validateUpdateSeatsInput,
+  FlightController.updateRemainingSeats
+);
 module.exports = router;
