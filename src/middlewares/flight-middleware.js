@@ -76,6 +76,16 @@ function validateFlightRequest(req, res, next) {
   next();
 }
 
+function validateUpdateSeatsInput(req, res, next) {
+  if (!req.body.seats) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json(new ApiError(StatusCodes.BAD_REQUEST, null, "seats not found"));
+  }
+  next();
+}
+
 module.exports = {
   validateFlightRequest,
+  validateUpdateSeatsInput,
 };
